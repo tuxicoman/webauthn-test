@@ -1,0 +1,11 @@
+{
+  "targets": {
+    "webauthn-6ef89": {
+      "hosting": {
+        "webauthn-test": [
+          "webauthn-6ef89"
+        ]
+      }
+    }
+  }
+}

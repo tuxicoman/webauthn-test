@@ -8,7 +8,7 @@ export class PublickeyCredentialsService {
 
   publicKey: PublicKeyCredentialCreationOptions;
 
-  register() {
+  register(): Promise<PublicKeyCredential> {
     const challenge = new Uint8Array(32);
     window.crypto.getRandomValues(challenge);
 
@@ -35,15 +35,16 @@ export class PublickeyCredentialsService {
       ]
     };
 
-    navigator.credentials
-      .create({ publicKey: this.publicKey })
-      .then((newCredentialInfo: PublicKeyCredential) => {
-        alert('SUCCESS');
-        console.log('SUCCESS', newCredentialInfo);
-      })
-      .catch(error => {
-        alert('Open your browser console!');
-        console.log('FAIL', error);
-      });
+    return navigator.credentials.create({
+      publicKey: this.publicKey
+    }) as Promise<PublicKeyCredential>;
+    // .then((newCredentialInfo: PublicKeyCredential) => {
+    //   alert('SUCCESS');
+    //   console.log('SUCCESS', newCredentialInfo);
+    // })
+    // .catch(error => {
+    //   alert('Open your browser console!');
+    //   console.log('FAIL', error);
+    // });
   }
 }

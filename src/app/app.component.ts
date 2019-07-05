@@ -9,7 +9,10 @@ import { PublickeyCredentialsService } from './publickey-credentials.service';
 })
 export class AppComponent {
   pwdCred;
-  constructor(private pwdService: PasswordCredentialsService, private pkService : PublickeyCredentialsService) {}
+  constructor(
+    private pwdService: PasswordCredentialsService,
+    private pkService: PublickeyCredentialsService
+  ) {}
 
   async store() {
     await this.pwdService
@@ -23,8 +26,12 @@ export class AppComponent {
     this.pwdCred = this.pwdService.get();
   }
 
-
-  register(){
-this.pkService.register()
+  async register() {
+    try {
+      const cred = await this.pkService.register();
+      console.log('REGISTER :', cred);
+    } catch (error) {
+      console.log('[ERROR] REGISTER :', error);
+    }
   }
 }
